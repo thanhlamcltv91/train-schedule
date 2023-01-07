@@ -17,11 +17,11 @@ pipeline {
         stage('Build docker images') {
             steps {
                 script {
-                    DOCKER_IMAGE="test-gitops"
+                    DOCKER_IMAGE="gitops-demo"
                     app = docker.build("tuannanhh/${DOCKER_IMAGE}")
-                    app.inside {
-                        sh 'echo $(curl localhost:8080)'
-                    }
+                    // app.inside {
+                    //     sh 'echo $(curl localhost:8080)'
+                    // }
                 }
             }
         }
@@ -32,11 +32,12 @@ pipeline {
                     DOCKER_REGISTRY="registry.hub.docker.com"
                     DOCKER_NAME="tuannanhh"
 
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub_tuananh') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                         app.push("${env.BUILD_NUMBER}")
                         // app.push("latest")
                     }
 
+                    sh "docker image rm ${DOCKER_NAME}/${DOCKER_IMAGE}:latest"
                     sh "docker image rm ${DOCKER_REGISTRY}/${DOCKER_NAME}/${DOCKER_IMAGE}:${env.BUILD_NUMBER}"
                 }
             }
