@@ -34,7 +34,7 @@ pipeline {
 
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                         app.push("${env.BUILD_NUMBER}")
-                        // app.push("latest")
+                        app.push("latest")
                     }
 
                     sh "docker image rm ${DOCKER_NAME}/${DOCKER_IMAGE}:latest"
@@ -46,7 +46,7 @@ pipeline {
         stage('Trigger ManifestUpdate') {
             steps {
                 echo "Update manifestjob"
-                build job: 'update-manifest-github', 
+                build job: 'update-manifest-github', //name job 2
                     parameters: [
                         string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)
                     ]   
