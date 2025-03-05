@@ -17,7 +17,7 @@ pipeline {
         stage('push images to repo') {
             steps {
                 sh 'sudo docker tag tel4vn:v${BUILD_NUMBER} thanhlamcltv91/tel4vn:v${BUILD_NUMBER}'
-                sh 'sudo docker login -u thanhlamcltv91 -p L@mnguyen91'
+                sh 'sudo docker login -u thanhlamcltv91 -p f1&kdLnnNSzsYhXb'
                 sh 'sudo docker push thanhlamcltv91/tel4vn:v${BUILD_NUMBER}'
             }
         }
