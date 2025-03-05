@@ -1,6 +1,5 @@
 pipeline {
-    agent { label 'tel4vn' }
- 
+    agent any 
     stages {
         stage('check out sourcecode') {
             steps {
