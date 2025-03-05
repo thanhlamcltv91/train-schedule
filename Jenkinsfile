@@ -11,7 +11,9 @@ pipeline {
         stage('build images') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'sudo-credentials', passwordVariable: 'f1&kdLnnNSzsYhXb', usernameVariable: 'thanhlamcltv91')]) {
-                    sh 'echo f1&kdLnnNSzsYhXb | sudo -S docker build -t tel4vn:v${BUILD_NUMBER} .'sh 'cat server.js'}
+                    sh 'echo f1&kdLnnNSzsYhXb | sudo -S docker build -t tel4vn:v${BUILD_NUMBER} .'
+                    sh 'cat server.js'
+                }
             }
         }
         
