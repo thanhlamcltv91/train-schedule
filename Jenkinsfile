@@ -8,6 +8,7 @@ pipeline {
             checkout scmGit(branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/thanhlamcltv91/train-schedule.git']])
             }
         }
+        
         stage('build images') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker.com', passwordVariable: 'f1&kdLnnNSzsYhXb', usernameVariable: 'thanhlamcltv91')]) {
@@ -18,8 +19,8 @@ pipeline {
         
         stage('push images to repo') {
             steps {
+                sh 'echo "f1&kdLnnNSzsYhXb" | docker login -u thanhlamcltv91 --password-stdin'
                 sh 'sudo docker tag tel4vn:v${BUILD_NUMBER} thanhlamcltv91/tel4vn:v${BUILD_NUMBER}'
-                sh 'sudo docker login -u thanhlamcltv91 -p f1&kdLnnNSzsYhXb'
                 sh 'sudo docker push thanhlamcltv91/tel4vn:v${BUILD_NUMBER}'
             }
         }
