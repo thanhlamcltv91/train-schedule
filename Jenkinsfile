@@ -10,7 +10,7 @@ pipeline {
         }
         stage('build images') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'SUDO_PASSWORD', usernameVariable: 'SUDO_USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'f1&kdLnnNSzsYhXb', usernameVariable: 'thanhlamcltv91')]) {
                     sh 'echo $SUDO_PASSWORD | sudo -S docker build -t tel4vn:v${BUILD_NUMBER} .'
                     sh 'cat server.js'
                 }
@@ -18,9 +18,9 @@ pipeline {
         }
         stage('push images to repo') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'f1&kdLnnNSzsYhXb', usernameVariable: 'thanhlamcltv91')]) {
                     sh 'sudo docker tag tel4vn:v${BUILD_NUMBER} thanhlamcltv91/tel4vn:v${BUILD_NUMBER}'
-                    sh 'echo $DOCKER_PASSWORD | sudo -S docker login -u $DOCKER_USERNAME --password-stdin'
+                    sh 'echo f1&kdLnnNSzsYhXb | sudo -S docker login -u $thanhlamcltv91 --password-stdin'
                     sh 'sudo docker push thanhlamcltv91/tel4vn:v${BUILD_NUMBER}'
                 }
             }
