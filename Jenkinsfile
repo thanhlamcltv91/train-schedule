@@ -12,7 +12,6 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker.com', passwordVariable: 'f1&kdLnnNSzsYhXb', usernameVariable: 'thanhlamcltv91')]) {
                     sh 'sudo -S docker build -t tel4vn:v${BUILD_NUMBER} .'
-                    #sh 'cat server.js'
                 }
             }
         }
