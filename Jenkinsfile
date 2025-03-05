@@ -5,12 +5,12 @@ pipeline {
         stage('check out sourcecode') {
             steps {
             deleteDir()    
-            checkout scmGit(branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[credentialsId: 'thanhlamcltv91', url: 'https://github.com/thanhlamcltv91/train-schedule.git']])
+            checkout scmGit(branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/thanhlamcltv91/train-schedule.git']])
             }
         }
         stage('build images') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'sudo-credentials', passwordVariable: 'f1&kdLnnNSzsYhXb', usernameVariable: 'thanhlamcltv91')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker.com', passwordVariable: 'f1&kdLnnNSzsYhXb', usernameVariable: 'thanhlamcltv91')]) {
                     sh 'echo f1&kdLnnNSzsYhXb | sudo -S docker build -t tel4vn:v${BUILD_NUMBER} .'
                     sh 'cat server.js'
                 }
