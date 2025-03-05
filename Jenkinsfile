@@ -1,6 +1,9 @@
 pipeline {
     agent any
- 
+    environment {
+        DOCKER_USERNAME = credentials('thanhlamcltv91')
+        DOCKER_PASSWORD = credentials('f1&kdLnnNSzsYhXb')
+    }
     stages {
         stage('check out sourcecode') {
             steps {
@@ -19,7 +22,7 @@ pipeline {
         
         stage('push images to repo') {
             steps {
-                sh 'echo "f1&kdLnnNSzsYhXb" | docker login -u thanhlamcltv91 --password-stdin'
+                sh 'echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USERNAME --password-stdin'
                 sh 'sudo docker tag tel4vn:v${BUILD_NUMBER} thanhlamcltv91/tel4vn:v${BUILD_NUMBER}'
                 sh 'sudo docker push thanhlamcltv91/tel4vn:v${BUILD_NUMBER}'
             }
